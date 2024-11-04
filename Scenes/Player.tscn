@@ -1,0 +1,116 @@
+[gd_scene load_steps=20 format=3 uid="uid://df3eusme35ywu"]
+
+[ext_resource type="Texture2D" uid="uid://dd8mgsgjjr43d" path="res://Assets/Player/p1_stand.png" id="1_g7dha"]
+[ext_resource type="Script" path="res://Scenes/player.gd" id="1_h46b6"]
+[ext_resource type="Texture2D" uid="uid://dua32doopbvyn" path="res://Assets/Player/p1_hurt.png" id="2_3irha"]
+[ext_resource type="Texture2D" uid="uid://mrw6uu2me3va" path="res://Assets/Player/p1_jump.png" id="2_w0flf"]
+[ext_resource type="Texture2D" uid="uid://c3elkavanij2p" path="res://Assets/Player/p1_walk/p1_walk01.png" id="3_n2mxo"]
+[ext_resource type="Texture2D" uid="uid://cptrod43qvb7h" path="res://Assets/Player/p1_walk/p1_walk02.png" id="4_lbe5t"]
+[ext_resource type="Texture2D" uid="uid://75ike2mh05oc" path="res://Assets/Player/p1_walk/p1_walk03.png" id="5_7b0yf"]
+[ext_resource type="Texture2D" uid="uid://daeuybacy2r2e" path="res://Assets/Player/p1_walk/p1_walk04.png" id="6_qufg2"]
+[ext_resource type="Texture2D" uid="uid://cuv1mfkyq04re" path="res://Assets/Player/p1_walk/p1_walk05.png" id="7_ff126"]
+[ext_resource type="Texture2D" uid="uid://bkyba8ty8q5cq" path="res://Assets/Player/p1_walk/p1_walk06.png" id="8_pvv84"]
+[ext_resource type="Texture2D" uid="uid://b16icvhm3spc2" path="res://Assets/Player/p1_walk/p1_walk07.png" id="9_y8fxg"]
+[ext_resource type="Texture2D" uid="uid://bc34x53ph7hq1" path="res://Assets/Player/p1_walk/p1_walk08.png" id="10_52qvy"]
+[ext_resource type="Texture2D" uid="uid://dmfgn10gg3bd7" path="res://Assets/Player/p1_walk/p1_walk10.png" id="11_qhmjf"]
+[ext_resource type="Texture2D" uid="uid://dbtd0oswgssqq" path="res://Assets/Player/p1_walk/p1_walk11.png" id="12_25id2"]
+[ext_resource type="AudioStream" uid="uid://cb6jkdvpar5bh" path="res://Assets/Sounds/jump.ogg" id="15_t84cf"]
+[ext_resource type="AudioStream" uid="uid://vesw1gqgx2hu" path="res://Assets/Sounds/player_hurt.ogg" id="16_e4e20"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_78dlf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3irha")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_g7dha")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_w0flf")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_n2mxo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lbe5t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7b0yf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qufg2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ff126")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pvv84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_y8fxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_52qvy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_qhmjf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_25id2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5q7cb"]
+size = Vector2(67, 93)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aqoys"]
+size = Vector2(41, 19)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_h46b6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_78dlf")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_5q7cb")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-3.5, 36.5)
+shape = SubResource("RectangleShape2D_aqoys")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("15_t84cf")
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("16_e4e20")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

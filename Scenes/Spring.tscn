@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbhmhr1fyl4h2"]
+
+[ext_resource type="Texture2D" uid="uid://bivdwyrsf367c" path="res://Assets/springboardUp.png" id="1_8s0wj"]
+[ext_resource type="Script" path="res://Scenes/spring.gd" id="1_jin8s"]
+[ext_resource type="Texture2D" uid="uid://df0x3h600ov1w" path="res://Assets/springboardDown.png" id="2_yhgxy"]
+[ext_resource type="AudioStream" uid="uid://gtswn2gfhafn" path="res://Assets/Sounds/spring.ogg" id="4_rwrn3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mc2sh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8s0wj")
+}],
+"loop": true,
+"name": &"bounce",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yhgxy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkx8e"]
+size = Vector2(40, 20)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_jin8s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mc2sh")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_fkx8e")
+
+[node name="SpringSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_rwrn3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
