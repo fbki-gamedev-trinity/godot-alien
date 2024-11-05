@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://4ui3w1ri1wg8"]
+
+[ext_resource type="Texture2D" uid="uid://bgox6qraxis1g" path="res://Assets/Enemies/slimeWalk1.png" id="1_4b1cu"]
+[ext_resource type="Script" path="res://Scenes/enemy_slime.gd" id="1_45vio"]
+[ext_resource type="Texture2D" uid="uid://fg346muv1x08" path="res://Assets/Enemies/slimeDead.png" id="2_jw4e5"]
+[ext_resource type="Texture2D" uid="uid://cmo6sbgk280ir" path="res://Assets/Enemies/slimeWalk2.png" id="2_rvwvx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_stjbd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jw4e5")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4b1cu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rvwvx")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ux8v"]
+size = Vector2(28, 20)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_45vio")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_stjbd")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 4)
+shape = SubResource("RectangleShape2D_8ux8v")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

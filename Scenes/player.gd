@@ -68,7 +68,6 @@ func die():
 			get_tree().reload_current_scene()
 			return
 		Global.player_lives -= 1
-		print_debug(Global.player_lives)
 		hurt_sound.play()
 		Global.emit_signal("lives_updated")
 		
