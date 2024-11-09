@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://crntoojy78qq5"]
+[gd_scene load_steps=16 format=4 uid="uid://crntoojy78qq5"]
 
 [ext_resource type="Texture2D" uid="uid://bgq7sbe027l3w" path="res://Assets/tiles_spritesheet.png" id="1_iy3nb"]
 [ext_resource type="PackedScene" uid="uid://df3eusme35ywu" path="res://Scenes/Player.tscn" id="2_be1ru"]
+[ext_resource type="PackedScene" uid="uid://dhehxmhcnm1nt" path="res://Scenes/enemy.tscn" id="3_cyuyd"]
 [ext_resource type="PackedScene" uid="uid://dwgw5h8andy07" path="res://Scenes/Spikes.tscn" id="3_otlnd"]
 [ext_resource type="PackedScene" uid="uid://dbhmhr1fyl4h2" path="res://Scenes/Spring.tscn" id="4_y735k"]
 [ext_resource type="PackedScene" uid="uid://cm2i62ofbe4im" path="res://Scenes/VictoryScene.tscn" id="5_ck8fn"]
@@ -70,11 +71,11 @@ tile_map_data = PackedByteArray("AAAFAAcAAQABAAYAAAAGAAcAAQABAAYAAAAHAAcAAQABAAY
 tile_set = SubResource("TileSet_sgcjn")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_be1ru")]
-position = Vector2(591, 439)
+position = Vector2(592, 440)
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 limit_left = 0
-limit_right = 2610
+limit_right = 3610
 metadata/_edit_lock_ = true
 
 [node name="Area2D" parent="." instance=ExtResource("4_y735k")]
@@ -160,7 +161,7 @@ metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="Area2D3" parent="." instance=ExtResource("11_dki6e")]
-position = Vector2(2335, 448)
+position = Vector2(3482, 367)
 color = "green"
 
 [node name="Area2D4" parent="." instance=ExtResource("11_dki6e")]
@@ -174,3 +175,6 @@ color = "green"
 [node name="Area2D5" parent="." instance=ExtResource("12_uukgv")]
 position = Vector2(2138, 422)
 color = "blue"
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("3_cyuyd")]
+position = Vector2(2737, 473)
