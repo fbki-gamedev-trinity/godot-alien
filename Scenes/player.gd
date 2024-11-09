@@ -9,6 +9,8 @@ var is_hurt = false
 var jump_sound
 var hurt_sound
 
+var collected_keys = {}
+
 func _ready():
 	animated_sprite = $AnimatedSprite2D
 	jump_sound = $Node2D/JumpSound
@@ -68,7 +70,6 @@ func die():
 			get_tree().reload_current_scene()
 			return
 		Global.player_lives -= 1
-		print_debug(Global.player_lives)
 		hurt_sound.play()
 		Global.emit_signal("lives_updated")
 		
@@ -79,3 +80,16 @@ func die():
 		await get_tree().create_timer(0.5).timeout
 		
 		is_hurt = false
+
+func collect_key(key: Node2D) -> void:
+	var key_color = key.color
+	collected_keys[key_color] = 1
+	Global.emit_signal("keys_updated", collected_keys)
+
+func try_open_door(lock: Node2D) -> void:
+	var lock_color = lock.color
+	print_debug(collected_keys)
+	if lock_color in Global.collected_keys and Global.collected_keys[lock_color] > 0:
+		collected_keys[lock_color] -= 1
+		lock.queue_free()
+		Global.emit_signal("keys_updated", collected_keys)
