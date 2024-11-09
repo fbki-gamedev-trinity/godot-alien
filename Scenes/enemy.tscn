@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhehxmhcnm1nt"]
+
+[ext_resource type="Texture2D" uid="uid://cd8c1180q170u" path="res://Assets/slimeWalk1.png" id="1_c40t8"]
+[ext_resource type="Script" path="res://Scenes/enemy.gd" id="1_j657m"]
+[ext_resource type="Texture2D" uid="uid://geyvewo56jdy" path="res://Assets/slimeWalk2.png" id="2_ik6rf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_frs6q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_c40t8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ik6rf")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4iln8"]
+size = Vector2(50, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_be5l1"]
+size = Vector2(28, 23)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource("1_j657m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_frs6q")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.217888
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4iln8")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-4, 2.5)
+shape = SubResource("RectangleShape2D_be5l1")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
