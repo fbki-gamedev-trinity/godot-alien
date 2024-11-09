@@ -29,14 +29,12 @@ func update_lives_display():
 		empty_heart.texture = preload("res://Assets/hud_heartEmpty.png")  # Путь к пустому сердечку
 		heart_container.add_child(empty_heart)
 
-func update_key_display(collected_keys: Dictionary) -> void:
+func update_key_display(collected_keys: Array) -> void:
 	for child in key_container.get_children():
 		child.queue_free()
 
-	for color in collected_keys.keys():
-		var count = collected_keys[color]
-		for i in range(count):
-			var key_icon = TextureRect.new()
-			var path = "res://Assets/Keys_And_Locks/key_" + color + ".png"
-			key_icon.texture = load(path)
-			key_container.add_child(key_icon)
+	for color in collected_keys:
+		var key_icon = TextureRect.new()
+		var path = "res://Assets/Keys_And_Locks/key_" + color + ".png"
+		key_icon.texture = load(path)
+		key_container.add_child(key_icon)

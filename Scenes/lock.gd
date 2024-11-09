@@ -9,6 +9,5 @@ func _ready():
 			
 
 func _on_body_entered(body: Node2D) -> void:
-	print_debug('lock')
 	if body.is_in_group("player"):
 		body.try_open_door(self)

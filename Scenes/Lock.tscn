@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqrtexlpvyo7d"]
+[gd_scene load_steps=5 format=3 uid="uid://cqrtexlpvyo7d"]
 
 [ext_resource type="Texture2D" uid="uid://vb4hube7jiig" path="res://Assets/Keys_And_Locks/lock_blue.png" id="1_iglwd"]
 [ext_resource type="Script" path="res://Scenes/lock.gd" id="1_yujdd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xvp2"]
 size = Vector2(93, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nk03u"]
+size = Vector2(70, 69)
 
 [node name="Area2D" type="Area2D"]
 collision_layer = 32
@@ -16,5 +19,12 @@ texture = ExtResource("1_iglwd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_2xvp2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_nk03u")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

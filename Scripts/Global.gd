@@ -10,7 +10,7 @@ var is_game_won = false
 signal lives_updated
 
 signal keys_updated
-var collected_keys = {}
+var collected_keys = []
 
 func handle_victory():
 	is_game_won = true

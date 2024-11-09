@@ -9,7 +9,7 @@ var is_hurt = false
 var jump_sound
 var hurt_sound
 
-var collected_keys = {}
+var collected_keys = []
 
 func _ready():
 	animated_sprite = $AnimatedSprite2D
@@ -83,13 +83,13 @@ func die():
 
 func collect_key(key: Node2D) -> void:
 	var key_color = key.color
-	collected_keys[key_color] = 1
-	Global.emit_signal("keys_updated", collected_keys)
+	Global.collected_keys.append(key_color)
+	Global.emit_signal("keys_updated", Global.collected_keys)
 
 func try_open_door(lock: Node2D) -> void:
 	var lock_color = lock.color
-	print_debug(collected_keys)
-	if lock_color in Global.collected_keys and Global.collected_keys[lock_color] > 0:
-		collected_keys[lock_color] -= 1
+	print_debug(lock_color, collected_keys, lock_color in collected_keys)
+	if lock_color in Global.collected_keys:
+		Global.collected_keys.erase(lock_color)
 		lock.queue_free()
-		Global.emit_signal("keys_updated", collected_keys)
+		Global.emit_signal("keys_updated", Global.collected_keys)
