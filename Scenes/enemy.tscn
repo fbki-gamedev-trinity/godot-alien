@@ -1,11 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhehxmhcnm1nt"]
+[gd_scene load_steps=8 format=3 uid="uid://dhehxmhcnm1nt"]
 
 [ext_resource type="Texture2D" uid="uid://cd8c1180q170u" path="res://Assets/slimeWalk1.png" id="1_c40t8"]
 [ext_resource type="Script" path="res://Scenes/enemy.gd" id="1_j657m"]
 [ext_resource type="Texture2D" uid="uid://geyvewo56jdy" path="res://Assets/slimeWalk2.png" id="2_ik6rf"]
+[ext_resource type="Texture2D" uid="uid://nhmfb1swy177" path="res://Assets/slimeDead.png" id="2_sjy04"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_frs6q"]
 animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": ExtResource("2_sjy04")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_c40t8")
@@ -31,9 +40,8 @@ script = ExtResource("1_j657m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_frs6q")
-animation = &"walk"
+animation = &"dead"
 autoplay = "walk"
-frame_progress = 0.217888
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4iln8")

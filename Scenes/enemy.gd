@@ -26,6 +26,8 @@ func _process(delta):
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and body.velocity.y > 0:
+		animated_sprite.play("death")
+		await animated_sprite.animation_finished
 		queue_free()
 	else: 
 		body.die()

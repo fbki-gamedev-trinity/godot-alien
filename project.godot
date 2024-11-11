@@ -20,8 +20,12 @@ Global="*res://Scripts/Global.gd"
 
 [editor]
 
-movie_writer/movie_file="C:/Users/Вероника/Documents/platformer/demo.avi"
+movie_writer/movie_file="D:/isu_game_dev/platformer/demo.avi"
 movie_writer/canvas_textures/default_texture_filter=0
+
+[gui]
+
+theme/custom_font="res://Assets/Font.ttf"
 
 [input]
 

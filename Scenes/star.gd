@@ -7,5 +7,7 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		Global.handle_victory()
+		Global.is_game_won = true
+		var node_game_over = $"../CanvasLayer/Control"
+		node_game_over.game_over()
 		queue_free()

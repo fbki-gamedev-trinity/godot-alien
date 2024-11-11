@@ -67,20 +67,20 @@ func die():
 	if not is_hurt:
 		is_hurt = true
 		if(Global.player_lives == 0):
-			Global.player_lives = 3
-			get_tree().reload_current_scene()
-			return
-		Global.player_lives -= 1
-		hurt_sound.play()
-		Global.emit_signal("lives_updated")
-		
-		velocity.x = 0
-		velocity.x = -DAMAGE_PUSH_BACK_FORCE * (-1 if animated_sprite.flip_h else 1)
-		animated_sprite.play("hurt")
-		
-		await get_tree().create_timer(0.5).timeout
-		
-		is_hurt = false
+			var node_game_over = $"../CanvasLayer/Control"
+			node_game_over.game_over()
+		else:
+			Global.player_lives -= 1
+			hurt_sound.play()
+			Global.emit_signal("lives_updated")
+			
+			velocity.x = 0
+			velocity.x = -DAMAGE_PUSH_BACK_FORCE * (-1 if animated_sprite.flip_h else 1)
+			animated_sprite.play("hurt")
+			
+			await get_tree().create_timer(0.5).timeout
+			
+			is_hurt = false
 
 func collect_key(key: Node2D) -> void:
 	var key_color = key.color
